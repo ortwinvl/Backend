@@ -11,6 +11,7 @@ const validationMiddleware = (
   forbidNonWhitelisted = false,
 ): RequestHandler => {
   return async (req, res, next) => {
+    //console.log(req.body);
     validate(plainToInstance(type, req.body), { whitelist, forbidNonWhitelisted }).then((errors: ValidationError[]) => {
       if (errors.length > 0) {
         const message = errors.map((error: ValidationError) => Object.values(error.constraints!)).join(', ');

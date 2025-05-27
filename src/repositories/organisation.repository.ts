@@ -42,28 +42,14 @@ class OrganisationRepository implements IOrganisationRepository{
         const organisation = await Organisation.findOne({where: {
                     id: organisationid
                 }})
-                    .then((result) => {
-                        return {
-                            result: 1, data: result
-                        };
-                    },
-                        (err) => {
-                            return {
-                                result: -1,
-                                error: err.message
-                            }
-                        }
-                    )
-        
-                if (organisation && organisation.result == 1) {
-                    return organisation;
+            .then((result) => { return (result === null ? { result: -1, data: "Organisation not found" } : { result: 1, data: result });
+            },
+                (err) => {
+                    this.logger.error(err.message, organisationid);
+                    return { result: -1, error: err.message }
                 }
-                else {
-                    return {
-                        result: -1,
-                        error: "Organisation not found"
-                    }
-                }
+            )
+            return organisation;
     }
 
     // createNewOrganisation function - To create a new Organisation

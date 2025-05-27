@@ -66,7 +66,7 @@ class BackOfficeController {
             const newenumvalue = plainToInstance(UpdateEnumDto, req.body)
 
             const oldenumvalue = await this.repository.findOneEnumValueById(req.organisationid, enumvalueId)
-
+            console.log(JSON.stringify(oldenumvalue))
             if (oldenumvalue.result != 1)  {
                 res.status(500).json(oldenumvalue);
                 return;

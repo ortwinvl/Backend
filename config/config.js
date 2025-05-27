@@ -11,6 +11,10 @@ module.exports = {
       instanceName: "SQLEXPRESS",
       options: { encrypt: true }
     },
+    define:{
+      underscored: true,
+      timestamps: true
+    },
     database: process.env.SQL_DATABASE || 'WTCApp',
     username: process.env.SQL_USER || 'sa',
     password: process.env.SQL_PWD || 'Development123456!',

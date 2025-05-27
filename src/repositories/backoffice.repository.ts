@@ -47,20 +47,14 @@ class BackOfficeRepository implements IBackOfficeRepository{
         const enumvalue = await Enum.findOne({where: {  id : enumvalueId,
                                                         [Op.or]: [ { organisation: organisationid }, { fixed: 1} ]
                                                     }})
-            .then((result) => { return { result: 1, data: result };
+            .then((result) => { return (result === null ? { result: -1, data: "EnumValue not found" } : { result: 1, data: result });
             },
                 (err) => {
                     this.logger.error(err.message, organisationid);
                     return { result: -1, error: err.message }
                 }
             )
-
-        if (enumvalue && enumvalue.result == 1) {
-            return enumvalue;
-        }
-        else {
-            return { result: -1, error: "EnumValue not found" }
-        }
+        return enumvalue;
     }
     
     // createNewEnumValue function - To create new EnumValue

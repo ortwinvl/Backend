@@ -1,5 +1,5 @@
 import { logger } from 'services';
-import { BackOfficeRepository, OrganisationRepository, MemberRepository } from 'repositories';
+import { BackOfficeRepository, OrganisationRepository, MemberRepository, RideRepository, ResultRepository } from 'repositories';
 import { Container } from "typedi";
 
 const container = Container.of();
@@ -16,4 +16,8 @@ export function initDI() {
     container.set('organisationrepository', organisationrepository);
     const memberrepository = new MemberRepository();
     container.set('memberrepository', memberrepository);
+    const riderepository = new RideRepository();
+    container.set('riderepository', riderepository);
+    const resultrepository = new ResultRepository();
+    container.set('resultrepository', resultrepository);
 }

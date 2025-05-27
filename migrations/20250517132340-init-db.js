@@ -7,7 +7,18 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.sequelize.transaction(t => {
         return Promise.all([
-            queryInterface.sequelize.query(`INSERT [dbo].[organisation] ([id], [organisation], [vatnumber], [active], [contactperson], [contactemail], [contactphone], [streetandnr], [city], [zipcode]) 
+            queryInterface.sequelize.query(`CREATE TABLE [dbo].[Sessions](
+                      [sid] [nvarchar](36) NOT NULL,
+                      [expires] [datetimeoffset](7) NULL,
+                      [data] [nvarchar](max) NULL,
+                      [created_at] [datetimeoffset](7) NULL,
+                      [updated_at] [datetimeoffset](7) NULL,
+                    PRIMARY KEY CLUSTERED 
+                    (
+                      [sid] ASC
+                    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+                    ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];
+            INSERT [dbo].[organisation] ([id], [organisation], [vatnumber], [active], [contactperson], [contactemail], [contactphone], [streetandnr], [city], [zipcode]) 
             VALUES (N'11111aa1-11a1-11a1-111a-11aaa111aa11', N'Acsis BVBA', N'BE 0472.355.851', 1, N'Ortwin Van Leuven', N'ortwin@acsis.be', N'+32 477 27 19 21', N'Kampenstraat 70', N'Borsbeke', N'9552');
             SET IDENTITY_INSERT [dbo].[enum] ON 
             INSERT [dbo].[enum] ([id], [enum], [organisation], [value], [fixed]) VALUES (20, N'language', N'11111aa1-11a1-11a1-111a-11aaa111aa11', N'nl', 1)

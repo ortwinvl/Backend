@@ -14,6 +14,7 @@ export class Organisation extends Model<
   declare id: CreationOptional<string>
   declare organisation: string
   declare vatnumber: string | null
+  declare organisationtype: number
   declare active: number
   declare streetandnr: string | null
   declare contactperson: string | null
@@ -36,6 +37,11 @@ export class Organisation extends Model<
       organisation: {
         type: DataTypes.STRING(75),
         allowNull: false
+      },
+      organisationtype: {
+        type: DataTypes.SMALLINT,
+        allowNull: false,
+        defaultValue: 0
       },
       vatnumber: {
         type: DataTypes.STRING
@@ -65,10 +71,12 @@ export class Organisation extends Model<
         type: DataTypes.STRING
       },
       createdAt: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
       },
       updatedAt: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
       }
     }, {
       sequelize,

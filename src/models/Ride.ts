@@ -25,13 +25,14 @@ export class Ride extends Model<
   declare destination: string
   declare leader: number | null
   declare starttime: Date
-  declare duration: string | null
+  declare duration: number
   declare classification: number | null
   declare officialride: number
   declare elevation: number | null
   declare distance: number | null
   declare organisation: string | null
   declare linkfield: string | null
+  declare ispublic: number
   declare createdAt: CreationOptional<Date>
   declare updatedAt: CreationOptional<Date>
 
@@ -80,7 +81,9 @@ export class Ride extends Model<
         allowNull: false
       },
       duration: {
-        type: DataTypes.TIME
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 30
       },
       classification: {
         type: DataTypes.INTEGER
@@ -104,11 +107,18 @@ export class Ride extends Model<
       linkfield: {
         type: DataTypes.STRING
       },
+      ispublic: {
+        type: DataTypes.SMALLINT,
+        allowNull: false,
+        defaultValue: 0
+      },
       createdAt: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
       },
       updatedAt: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
       }
     }, {
       sequelize,

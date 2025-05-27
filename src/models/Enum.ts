@@ -69,10 +69,12 @@ export class Enum extends Model<
         defaultValue: 0
       },
       createdAt: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
       },
       updatedAt: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
       }
     }, {
       sequelize,

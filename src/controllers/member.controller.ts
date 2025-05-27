@@ -102,7 +102,7 @@ class MemberController {
                 return
             } 
             
-            const u = await this.repository.deleteMember(oldmember);
+            const u = await this.repository.deleteMember(oldmember.data);
             if (u.result == 1) {
                 res.status(200).json(u);
             }
@@ -212,7 +212,9 @@ class MemberController {
                         id: member.data.id,
                         name: member.data.name,
                         firstname: member.data.firstname, 
+                        isadmin: member.data.isadmin,
                         email: member.data.email,
+                        organisation: member.data.organisationid.organisation,
                         expiresAt: tokendata.expiresAt,
                         accessToken: tokendata.accessToken, }
                     };
@@ -250,7 +252,9 @@ class MemberController {
                         id: member.data.id,
                         name: member.data.name,
                         firstname: member.data.firstname, 
+                        isadmin: member.data.isadmin,
                         email: member.data.email,
+                        organisation: member.data.organisationid.organisation,
                         expiresAt: tokendata.expiresAt,
                         accessToken: tokendata.accessToken, }
                     };
@@ -308,7 +312,9 @@ class MemberController {
                         id: member.data.id,
                         name: member.data.name,
                         firstname: member.data.firstname, 
+                        isadmin: member.data.isadmin,
                         email: member.data.email,
+                        organisation: member.data.organisationid.organisation,
                         expiresAt: tokendata.expiresAt,
                         accessToken: tokendata.accessToken, }
                     };

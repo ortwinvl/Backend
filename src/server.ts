@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import App from './app';
 import { cleanEnv, port, str } from 'envalid';
-import { OrganisationRoute, MembersRoute, BackOfficeRoute } from './routes';
+import { OrganisationRoute, MembersRoute, BackOfficeRoute, RideRoute, ResultRoute } from './routes';
 import db from './db';
 import { initModels } from './models';
 import { initDI } from 'DI.Container';
@@ -23,6 +23,8 @@ const app = App.getInstance([
     new OrganisationRoute(), 
     new MembersRoute(),
     new BackOfficeRoute(),
+    new RideRoute(),
+    new ResultRoute(),
     ], db
 );
 

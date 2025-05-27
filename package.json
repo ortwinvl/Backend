@@ -15,7 +15,7 @@
     "db:reset": "npm run db:drop && npm run db:up",
     "db:create": "sequelize db:create",
     "db:createproduction": "cross-env NODE_ENV=production sequelize db:create",
-    "db:drop": "[[ $NODE_ENV == production ]] && exit 1 || sequelize db:drop",
+    "db:drop": "sequelize db:drop",
     "db:migrate": "sequelize db:migrate",
     "db:migratetest": "cross-env NODE_ENV=test sequelize db:migrate",
     "db:migrateproduction": "cross-env NODE_ENV=production sequelize db:migrate",

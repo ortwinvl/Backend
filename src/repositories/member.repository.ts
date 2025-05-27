@@ -2,20 +2,20 @@
 import { Member } from "../models"
 import db from '../db'
 import { QueryTypes } from "sequelize";
-import { IReturnType, ILogger, TokenData, IMember } from '../interfaces';
+import { IReturnType, ILogger } from '../interfaces';
 import _ from "lodash";
-import { Inject } from "typedi";
+import Container from "typedi";
 import { IMemberRepository, IOrganisationRepository } from ".";
 
 class MemberRepository implements IMemberRepository{
-    @Inject("logger") protected logger: ILogger;
-    @Inject("organisationrepository") protected organisationrepository: IOrganisationRepository;
+    protected orgRepository : IOrganisationRepository = Container.get('organisationrepository');
+    protected logger: ILogger = Container.get('logger');
 
     // listAllMembers for one organisation function
     public async listAllMembers(organisationid): Promise<IReturnType> {
         const Members =  await Member.findAll({ where: { organisation: organisationid }, 
                                                 attributes: { exclude: ['password', 'mfa', 'mfadate', 'active'] },
-                                                include: 'languageid'})
+                                                include: ['languageid', 'classificationid']})
             .then((result) => { return { result: 1, data: result };},
                 (err) => {
                     this.logger.error(err.message, organisationid);
@@ -27,49 +27,33 @@ class MemberRepository implements IMemberRepository{
 
     // Find a Member by email
     public async findOneMemberByEmail(MemberEmail: string) : Promise<IReturnType> {
-        const member = await Member.findOne({ where: {
-            email: MemberEmail
-        }})
-            .then((result) => {
-                if (result === null ) {
-                    return { result: -1, error: "Member Not Found" }
-                }
-                return { result: 1, data: result };
+        const member = await Member.findOne({ where: { email: MemberEmail },
+                                              include: ['languageid', 'organisationid']
+                                            })
+            .then((result) => { return (result === null ? { result: -1, data: "Member not found" } : { result: 1, data: result });
             },
                 (err) => {
                     this.logger.error(err.message, null);
                     return { result: -1, error: err.message }
                 }
             )
-
-        if (member && member.result == 1) {
-            return member;
-        }
-        else {
-            return { result: -1, error: "Member Not Found" }
-        }
+        return member;
     }
 
     // Find a Member by id
     public async findOneMemberById(organisationid, memberId: number) : Promise<IReturnType> {
-        const member = await Member.findOne({ where: {
-            organisation: organisationid,
-            id: memberId
-        }})
-            .then((result) => { return { result: 1, data: result };
+        const member = await Member.findOne({ where: { organisation: organisationid, id: memberId },
+                                              attributes: { exclude: ['password', 'mfa', 'mfadate', 'active'] },
+                                              include: ['languageid', 'classificationid']
+                                            })
+            .then((result) => { return (result === null ? { result: -1, data: "Member not found" } : { result: 1, data: result });
             },
                 (err) => {
                     this.logger.error(err.message, organisationid);
                     return { result: -1, error: err.message }
                 }
             )
-
-        if (member && member.result == 1) {
-            return member;
-        }
-        else {
-            return { result: -1, error: "Member not found" }
-        }
+        return member;
     }
 
     // createNewMember function - To create a new Member
@@ -79,7 +63,7 @@ class MemberRepository implements IMemberRepository{
                 return { result: 1, data: result };
             },
                 (err) => {
-                    this.logger.error(err.message, newMemberData.organisationid);
+                    this.logger.error(err, newMemberData.organisationid);
                     return { result: -1, error: err.message }
                 }
             )
@@ -89,40 +73,13 @@ class MemberRepository implements IMemberRepository{
     // createNewMemberWithOrganisation function - To create new Member
     public async createNewMemberWithOrganisation( newMemberData, newOrganisationData,) : Promise<IReturnType> {
         //Create organisation
-        //const orgRepository = new OrganisationRepository(this.logger);
-        const org = await this.organisationrepository.createNewOrganisation(newOrganisationData);
-
-        //console.log(JSON.stringify(org));
-        
-        //const orgService = new OrganisationService(orgRepository);
-        //const org = await orgService.CreateOrganisation(newOrganisationData, newlocationData)
+        const org = await this.orgRepository.createNewOrganisation(newOrganisationData);
         if (org.result != 1) return org
+
         //Create user
+        newMemberData.organisation = org.data.id;
         const u = await this.createNewMember(newMemberData)
-
-        //console.log(JSON.stringify(u));
         if (u.result != 1) return u
-
-            // .then(async (result) => {
-            //     // await db.query(`insert into [setting] (organisation, settinggroup, settingname)
-            //     // Select distinct :organisation, settinggroup, settingname from [setting]`,
-            //     // {
-            //     //     type: QueryTypes.INSERT,
-            //     //     replacements: { 'organisation' : org.data.id }
-            //     // });
-            //     // await db.query(`Update [location]
-            //     //             set location.organisation = o.id
-            //     //             from [organisation] o join [location] l on (l.id = o.address and l.organisation is null )`,
-            //     // {
-            //     //     type: QueryTypes.UPDATE,
-            //     // });
-            //     return { result: 1, data: result };
-            // },
-            //     (err) => {
-            //         this.logger.error(err.message, null);
-            //         return { result: -1, error: err.message }
-            //     }
-            // )
 
         return org;
     }

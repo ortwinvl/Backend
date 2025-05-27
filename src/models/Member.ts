@@ -42,6 +42,7 @@ export class Member extends Model<
   declare password: string | null
   declare createdAt: CreationOptional<Date>
   declare updatedAt: CreationOptional<Date>
+  declare fullname: CreationOptional<string>
 
   // Member belongsTo Enum (as Classificationid)
   declare classificationid?: NonAttribute<Enum>
@@ -142,10 +143,19 @@ export class Member extends Model<
         type: DataTypes.STRING
       },
       createdAt: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
       },
       updatedAt: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+      },
+      fullname: {
+        type: DataTypes.VIRTUAL,
+        get() {
+                    return this.firstname + ' ' + this.name;
+                },
+        
       }
     }, {
       sequelize,

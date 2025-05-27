@@ -4,6 +4,7 @@ import { Expose } from 'class-transformer';
 export interface IOrganisation {
   id?: string;
   organisation: string;
+  organisationtype: number;
   isactive: number;
   vatnumber?: string;
   streetandnr?: string;
@@ -22,6 +23,10 @@ export class CreateUpdateOrganisationDto implements IOrganisation{
   @Expose()
   public organisation: string;
 
+  @IsOptional() @IsNumber()
+  @Expose()
+  public organisationtype: number;
+
   @IsOptional() @IsString()
   @Expose()
   public vatnumber: string;
@@ -39,6 +44,7 @@ export class CreateUpdateOrganisationDto implements IOrganisation{
   public contactphone: string;
 
   @IsOptional() @IsNumber()
+  @Expose()
   public isactive: number;
 
   @IsOptional() @IsString()
@@ -57,6 +63,9 @@ export class CreateUpdateOrganisationDto implements IOrganisation{
 export class CreateOrganisationUserDto {
    @IsNotEmpty() @IsString()
   public organisation: string;
+
+  @IsOptional() @IsNumber()
+  public organisationtype: number;
 
   @IsNotEmpty() @IsString()
   public name: string;

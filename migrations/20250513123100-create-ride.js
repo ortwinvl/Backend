@@ -26,8 +26,9 @@ module.exports = {
         allowNull: false
       },
       duration: {
-        type: DataTypes.TIME,
-        field: 'duration'
+        type: DataTypes.INTEGER,
+        field: 'duration',
+        default: 30
       },
       classification: {
         type: DataTypes.INTEGER,
@@ -56,6 +57,12 @@ module.exports = {
       linkfield: {
         type: DataTypes.STRING,
         field: 'linkfield'
+      },
+      ispublic: {
+        type: DataTypes.SMALLINT,
+        field: 'ispublic',
+        allowNull: false,
+        defaultValue: 0
       },
       createdAt: {
         type: DataTypes.DATE,

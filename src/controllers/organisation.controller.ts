@@ -1,16 +1,18 @@
 import { Request, Response, NextFunction } from 'express';
-import { MemberRepository, OrganisationRepository } from '../repositories'; //, MailRepository
+import { IMemberRepository, IOrganisationRepository } from '../repositories'; //, MailRepository
 import { plainToInstance } from 'class-transformer';
 import { RequestWithUser, CreateUpdateOrganisationDto, CreateMemberDto, UpdateMemberDto } from '../interfaces';
 //import OrganisationService from '../services/organisation.service';
 //import { MailController } from './index';
 import { Service, Inject } from "typedi";
+import { MemberService } from 'services';
 
 @Service()
 class OrganisationController {
     
-    constructor(@Inject("backofficerepository") protected repository: OrganisationRepository,
-                @Inject("memberrepository") protected memberrepository: MemberRepository) {
+    constructor(@Inject("organisationrepository") protected repository: IOrganisationRepository,
+                @Inject("memberrepository") protected memberrepository: IMemberRepository,
+                @Inject() protected memberservice: MemberService) {
     }
 
     public listAllOrganisations = async (req: RequestWithUser, res: Response, next: NextFunction) => {
@@ -49,11 +51,12 @@ class OrganisationController {
             const org = plainToInstance(CreateUpdateOrganisationDto, req.body, { excludeExtraneousValues: true });
             const user = plainToInstance(CreateMemberDto, req.body, { excludeExtraneousValues: true });
 
-            const pwd = req.body.password;
+            const pwd = this.memberservice.generateHashedpassword(req.body.password);
             user.password = pwd
+            user.isadmin = 1;
             org.contactemail = user.email;
             org.contactperson = user.name + " " + user.firstname;
-            org.isactive = 0;
+            org.isactive = 1;
             const neworg = await this.memberrepository.createNewMemberWithOrganisation( user, org );
             if (neworg.result != 1) {
                 res.status(401).json(neworg);

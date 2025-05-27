@@ -16,6 +16,12 @@ module.exports = {
         field: 'organisation',
         allowNull: false
       },
+      organisationtype: {
+        type: DataTypes.SMALLINT,
+        field: 'organisationtype',
+        allowNull: false,
+        defaultValue: 0
+      },
       vatnumber: {
         type: DataTypes.STRING,
         field: 'vatnumber'

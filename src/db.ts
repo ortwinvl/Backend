@@ -22,7 +22,9 @@ const db: Sequelize = new Sequelize(SQL_DATABASE, SQL_USER, SQL_PWD, {
   },
   define:{
     underscored: true,
-    timestamps: false
+    timestamps: true,
+    createdAt: 'created_at',  // Use your actual column name
+    updatedAt: 'updated_at'   // Use your actual column name
   }
 });
 
