@@ -24,8 +24,8 @@ export class Setting extends Model<
   declare settinggroup: string
   declare settingname: string
   declare settingvalue: string | null
-  declare createdAt: CreationOptional<Date>
-  declare updatedAt: CreationOptional<Date>
+  declare created_at: CreationOptional<Date>
+  declare updated_at: CreationOptional<Date>
 
   // Setting belongsTo Organisation (as Organisationid)
   declare organisationid?: NonAttribute<Organisation>
@@ -61,11 +61,11 @@ export class Setting extends Model<
       settingvalue: {
         type: DataTypes.STRING
       },
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
-      updatedAt: {
+      updated_at: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       }

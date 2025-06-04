@@ -24,8 +24,8 @@ export class Logging extends Model<
   declare timestamp: Date | null
   declare loglevel: string | null
   declare logtext: string | null
-  declare createdAt: CreationOptional<Date>
-  declare updatedAt: CreationOptional<Date>
+  declare created_at: CreationOptional<Date>
+  declare updated_at: CreationOptional<Date>
 
   // Logging belongsTo Organisation (as Organisationid)
   declare organisationid?: NonAttribute<Organisation>
@@ -59,11 +59,11 @@ export class Logging extends Model<
       logtext: {
         type: DataTypes.TEXT
       },
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
-      updatedAt: {
+      updated_at: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       }

@@ -20,11 +20,11 @@ export class Result extends Model<
   InferAttributes<Result, {omit: ResultAssociations}>,
   InferCreationAttributes<Result, {omit: ResultAssociations}>
 > {
-  declare rideId: number
-  declare memberId: number
+  declare ride_id: number
+  declare member_id: number
   declare id: CreationOptional<number>
-  declare createdAt: CreationOptional<Date>
-  declare updatedAt: CreationOptional<Date>
+  declare created_at: CreationOptional<Date>
+  declare updated_at: CreationOptional<Date>
 
   // Result belongsTo Member (as Member)
   declare member?: NonAttribute<Member>
@@ -45,11 +45,11 @@ export class Result extends Model<
 
   static initModel(sequelize: Sequelize): typeof Result {
     Result.init({
-      rideId: {
+      ride_id: {
         type: DataTypes.INTEGER,
         allowNull: false
       },
-      memberId: {
+      member_id: {
         type: DataTypes.INTEGER,
         allowNull: false
       },
@@ -60,11 +60,11 @@ export class Result extends Model<
         allowNull: false,
         unique: true
       },
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
-      updatedAt: {
+      updated_at: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       }

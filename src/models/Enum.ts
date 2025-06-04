@@ -25,8 +25,8 @@ export class Enum extends Model<
   declare enum: string
   declare fixed: number
   declare pseudodeleted: number | null
-  declare createdAt: CreationOptional<Date>
-  declare updatedAt: CreationOptional<Date>
+  declare created_at: CreationOptional<Date>
+  declare updated_at: CreationOptional<Date>
 
   // Enum belongsTo Organisation (as Organisationid)
   declare organisationid?: NonAttribute<Organisation>
@@ -68,11 +68,11 @@ export class Enum extends Model<
         type: DataTypes.SMALLINT,
         defaultValue: 0
       },
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
-      updatedAt: {
+      updated_at: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       }

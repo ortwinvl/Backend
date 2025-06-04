@@ -14,7 +14,8 @@ class RideController {
 
     public listAllRides = async (req: RequestWithUser, res: Response, next: NextFunction) => {
         try {
-            const findAllRidesData = await this.repository.listAllRides(req.organisationid); //14080ca3-30e5-41d1-834f-80adb723de48
+            const queryparams = req.query;
+            const findAllRidesData = await this.repository.listAllRides(req.organisationid, queryparams); //14080ca3-30e5-41d1-834f-80adb723de48
             if (findAllRidesData.result == 1) {
                 res.status(200).json(findAllRidesData);
             }

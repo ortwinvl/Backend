@@ -3,8 +3,8 @@ import { Exclude, Expose } from 'class-transformer';
 
 export interface IResult {
     id: number;
-    rideId: number;
-    memberId: number;
+    ride_id: number;
+    member_id: number;
 }
 
 export class CreateResultDto implements IResult{
@@ -14,9 +14,9 @@ export class CreateResultDto implements IResult{
 
     @IsNotEmpty() @IsNumber()
     @Expose()
-    public rideId: number;
+    public ride_id: number;
 
     @IsNotEmpty() @IsNumber()
     @Expose()
-    public memberId: number;  
+    public member_id: number;  
 }

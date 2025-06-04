@@ -14,7 +14,8 @@ class ResultController {
 
     public listAllResults = async (req: RequestWithUser, res: Response, next: NextFunction) => {
         try {
-            const findAllResultsData = await this.repository.listAllResults(req.organisationid); //14080ca3-30e5-41d1-834f-80adb723de48
+            const queryparams = req.query;
+            const findAllResultsData = await this.repository.listAllResults(req.organisationid, queryparams);
             if (findAllResultsData.result == 1) {
                 res.status(200).json(findAllResultsData);
             }

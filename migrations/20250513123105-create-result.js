@@ -3,12 +3,12 @@ const DataTypes = require('sequelize').DataTypes
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('result', {
-      rideId: {
+      ride_id: {
         type: DataTypes.INTEGER,
         field: 'ride_id',
         allowNull: false
       },
-      memberId: {
+      member_id: {
         type: DataTypes.INTEGER,
         field: 'member_id',
         allowNull: false
@@ -21,11 +21,11 @@ module.exports = {
         allowNull: false,
         unique: true
       },
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         field: 'created_at'
       },
-      updatedAt: {
+      updated_at: {
         type: DataTypes.DATE,
         field: 'updated_at'
       }

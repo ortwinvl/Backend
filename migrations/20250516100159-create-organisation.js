@@ -57,11 +57,11 @@ module.exports = {
         type: DataTypes.STRING,
         field: 'zipcode'
       },
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         field: 'created_at'
       },
-      updatedAt: {
+      updated_at: {
         type: DataTypes.DATE,
         field: 'updated_at'
       }

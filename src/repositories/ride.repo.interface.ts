@@ -3,7 +3,7 @@ import { Ride } from "models";
 
 export interface IRideRepository {
     // listAllRides for one organisation function
-    listAllRides(organisationid: string): Promise<IReturnType>
+    listAllRides(organisationid: string, queryparams): Promise<IReturnType>
 
     // Find a Ride by id
     findOneRideById(organisationid: string, rideId: number) : Promise<IReturnType> 

@@ -95,14 +95,26 @@ module.exports = {
         type: DataTypes.STRING,
         field: 'password'
       },
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         field: 'created_at'
       },
-      updatedAt: {
+      updated_at: {
         type: DataTypes.DATE,
         field: 'updated_at'
-      }
+      },
+      licensenumber: {
+        type: DataTypes.STRING(50),
+        field: 'licensenumber'
+      },
+      emergencycontact: {
+        type: DataTypes.STRING,
+        field: 'emergencycontact'
+      },
+      emergencycontactphone: {
+        type: DataTypes.STRING(50),
+        field: 'emergencycontactphone'
+      },
     })
   },
   down: async (queryInterface, Sequelize) => {

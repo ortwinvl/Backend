@@ -33,8 +33,8 @@ export class Ride extends Model<
   declare organisation: string | null
   declare linkfield: string | null
   declare ispublic: number
-  declare createdAt: CreationOptional<Date>
-  declare updatedAt: CreationOptional<Date>
+  declare created_at: CreationOptional<Date>
+  declare updated_at: CreationOptional<Date>
 
   // Ride belongsTo Enum (as Classificationid)
   declare classificationid?: NonAttribute<Enum>
@@ -112,11 +112,11 @@ export class Ride extends Model<
         allowNull: false,
         defaultValue: 0
       },
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
-      updatedAt: {
+      updated_at: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       }

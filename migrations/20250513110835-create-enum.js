@@ -37,11 +37,11 @@ module.exports = {
         field: 'pseudodeleted',
         defaultValue: 0
       },
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         field: 'created_at'
       },
-      updatedAt: {
+      updated_at: {
         type: DataTypes.DATE,
         field: 'updated_at'
       }

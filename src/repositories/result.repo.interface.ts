@@ -3,7 +3,7 @@ import { Result } from "models";
 
 export interface IResultRepository {
     // listAllResults for one organisation function 
-    listAllResults(organisationid: string): Promise<IReturnType>
+    listAllResults(organisationid: string, queryparams): Promise<IReturnType>
 
     // Find a Result by id
     findOneResultById(resultId: number) : Promise<IReturnType> 

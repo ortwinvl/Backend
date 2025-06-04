@@ -22,8 +22,8 @@ export class Organisation extends Model<
   declare contactphone: string | null
   declare city: string | null
   declare zipcode: string | null
-  declare createdAt: CreationOptional<Date>
-  declare updatedAt: CreationOptional<Date>
+  declare created_at: CreationOptional<Date>
+  declare updated_at: CreationOptional<Date>
   
   static initModel(sequelize: Sequelize): typeof Organisation {
     Organisation.init({
@@ -70,11 +70,11 @@ export class Organisation extends Model<
       zipcode: {
         type: DataTypes.STRING
       },
-      createdAt: {
+      created_at: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
-      updatedAt: {
+      updated_at: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       }

@@ -18,11 +18,13 @@ export interface IMember {
     isadmin: number;
     active: number;
     classification_id: number;
-    vwb_nr: string;
     mfa: string;
     mfadate: Date;
     resetlink: string;
     resetlinktimestamp: Date;
+    licensenumber: string;
+    emergencycontact: string;
+    emergencycontactphone: string;
 }
 
 export class CreateMemberDto implements IMember{
@@ -78,10 +80,6 @@ export class CreateMemberDto implements IMember{
     @Expose()
     public email: string;
 
-    @IsOptional() @IsString()
-    @Expose()
-    public vwb_nr: string;
-
     @IsOptional() @IsNumber()
     @Expose()
     public isadmin: number;
@@ -109,6 +107,18 @@ export class CreateMemberDto implements IMember{
     @IsOptional() @IsDateString()
     @Exclude()
     public resetlinktimestamp: Date;
+
+    @IsOptional() @IsString()
+    @Expose()
+    public licensenumber: string;
+
+    @IsOptional() @IsString()
+    @Expose()
+    public emergencycontact: string;
+
+    @IsOptional() @IsString()
+    @Expose()
+    public emergencycontactphone: string;
 }
 
 export class UpdateMemberDto implements IMember{
@@ -164,10 +174,6 @@ export class UpdateMemberDto implements IMember{
     @Expose()
     public email: string;
 
-    @IsOptional() @IsString()
-    @Expose()
-    public vwb_nr: string;
-
     @IsOptional() @IsNumber()
     @Expose()
     public isadmin: number;
@@ -195,4 +201,16 @@ export class UpdateMemberDto implements IMember{
     @IsOptional() @IsDateString()
     @Exclude()
     public resetlinktimestamp: Date;
+
+    @IsOptional() @IsString()
+    @Expose()
+    public licensenumber: string;
+
+    @IsOptional() @IsString()
+    @Expose()
+    public emergencycontact: string;
+
+    @IsOptional() @IsString()
+    @Expose()
+    public emergencycontactphone: string;
 }
