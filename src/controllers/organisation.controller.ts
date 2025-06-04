@@ -5,7 +5,7 @@ import { RequestWithUser, CreateUpdateOrganisationDto, CreateMemberDto, UpdateMe
 //import OrganisationService from '../services/organisation.service';
 //import { MailController } from './index';
 import { Service, Inject } from "typedi";
-import { MemberService } from 'services';
+import { MemberService } from '../services';
 
 @Service()
 class OrganisationController {

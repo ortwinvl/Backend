@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
-import { BASEORGANISATION, SECRET_KEY } from 'config';
-import { IMember, TokenData } from 'interfaces';
+import { BASEORGANISATION, SECRET_KEY } from '../config';
+import { IMember, TokenData } from '../interfaces';
 import jsonwebtoken  from "jsonwebtoken";
 import { Service } from "typedi";
 

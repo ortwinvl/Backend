@@ -1,5 +1,5 @@
-import { logger } from 'services';
-import { BackOfficeRepository, OrganisationRepository, MemberRepository, RideRepository, ResultRepository } from 'repositories';
+import { logger } from './services';
+import { BackOfficeRepository, OrganisationRepository, MemberRepository, RideRepository, ResultRepository } from './repositories';
 import { Container } from "typedi";
 
 const container = Container.of();

@@ -5,7 +5,7 @@ import _ from "lodash";
 import Container from "typedi";
 import { IRideRepository } from ".";
 import { Op, QueryTypes } from "sequelize";
-import db from "db";
+import db from "../db";
 import { bool } from "../utils/util";
 
 class RideRepository implements IRideRepository{

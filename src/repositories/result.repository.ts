@@ -5,7 +5,7 @@ import _ from "lodash";
 import { QueryTypes } from "sequelize";
 import Container from "typedi";
 import { IResultRepository } from ".";
-import db from "db";
+import db from "../db";
 
 class ResultRepository implements IResultRepository{
     protected logger: ILogger = Container.get('logger');

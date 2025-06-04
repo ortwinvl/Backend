@@ -3,7 +3,7 @@ import { ILogger, LoginDto, RequestWithUser, UpdateMemberDto } from '../interfac
 import { IMemberRepository } from '../repositories';
 import { plainToInstance } from 'class-transformer';
 import { CreateMemberDto } from '../interfaces';
-import { MemberService } from 'services';
+import { MemberService } from '../services';
 import _ from "lodash";
 import { Service, Inject } from "typedi";
 import moment from 'moment';

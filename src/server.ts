@@ -4,7 +4,7 @@ import { cleanEnv, port, str } from 'envalid';
 import { OrganisationRoute, MembersRoute, BackOfficeRoute, RideRoute, ResultRoute } from './routes';
 import db from './db';
 import { initModels } from './models';
-import { initDI } from 'DI.Container';
+import { initDI } from './DI.Container';
 
 const validateEnv = () => {
   cleanEnv(process.env, {

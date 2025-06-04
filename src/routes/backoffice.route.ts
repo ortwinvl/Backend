@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { BackOfficeController } from 'controllers';
+import { BackOfficeController } from '../controllers';
 import { IRoute, CreateEnumDto, UpdateEnumDto } from '../interfaces';
 import { authMiddleware, validationMiddleware } from '../middlewares';
 import { BASEPATH } from '../config';
